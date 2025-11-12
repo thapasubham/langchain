@@ -14,7 +14,7 @@ export const Game = z.object({
 });
 
 export const getDetails = tool(
-  async ({ title, genre, developer, year, annual_income }) => {
+  async ({ title , genre, developer, year, annual_income }) => {
     const result = { title, genre, developer, year, annual_income };
     return JSON.stringify(result);
   },
