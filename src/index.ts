@@ -1,5 +1,24 @@
+import readline from "readline";
 import { ExecuteMsg } from "./messageExecute";
 
-const input = process.argv.slice(2).join(" ");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-ExecuteMsg(input);
+function ask() {
+  rl.question("Enter your message (or type 'exit' to quit): ", async (input) => {
+    if (input.toLowerCase() === "exit") {
+      rl.close();
+      return;
+    }
+
+    // Run your custom function
+    await ExecuteMsg(input);
+
+    // Ask again (loop)
+    ask();
+  });
+}
+
+ask();

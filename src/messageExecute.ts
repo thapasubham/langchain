@@ -5,6 +5,7 @@ import {
   HumanMessage,
   ToolMessage,
   SystemMessage,
+  BaseMessage,
 } from "langchain";
 import { handleToolError } from "./middleware/middleware";
 import { finalPrompt, systemPrompt } from "./prompt";
@@ -13,19 +14,15 @@ import { toolMapping } from "./toolMapper";
 import { weatherTool } from "./tool/WeatherTool";
 import { llmWithTools } from "./model";
 
-
-
-
-
 export async function ExecuteMsg(input: string) {
-  const messages = [
+
+const messages: BaseMessage[] = [
   new SystemMessage(systemPrompt),
   new HumanMessage(input),
 ];
   const llmOutput = await llmWithTools.invoke(messages);
   messages.push(llmOutput);
 
-  
 
   if (llmOutput.tool_calls && llmOutput.tool_calls.length > 0) {
     for await (const toolCall of llmOutput.tool_calls) {

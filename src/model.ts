@@ -1,6 +1,6 @@
 import { ChatGroq } from "@langchain/groq";
 import { weatherTool } from "./tool/WeatherTool";
-import { getDetails } from "./tool/DetailsTool";
+import { Game, getDetails } from "./tool/DetailsTool";
 import { createAgent } from "langchain";
 import { handleToolError } from "./middleware/middleware";
 
