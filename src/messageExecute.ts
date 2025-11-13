@@ -7,7 +7,7 @@ import {
   SystemMessage,
 } from "langchain";
 import { handleToolError } from "./middleware/middleware";
-import { systemPrompt } from "./prompt";
+import { finalPrompt, systemPrompt } from "./prompt";
 import { getDetails } from "./tool/DetailsTool";
 import { toolMapping } from "./toolMapper";
 import { weatherTool } from "./tool/WeatherTool";
@@ -44,7 +44,7 @@ export async function ExecuteMsg(input: string) {
 
     messages.push(
       new SystemMessage(
-        "You now have all tool results. Provide your final response strictly as JSON if it is about game details."
+       finalPrompt
       )
     );
 
